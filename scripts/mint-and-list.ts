@@ -1,4 +1,6 @@
-import { ethers } from "hardhat"
+import { ethers, network } from "hardhat"
+import { moveBlocks } from "../utils/move-blocks"
+import { localChains } from "../hardhat-helper-config"
 
 const PRICE = ethers.utils.parseEther("0.1")
 
@@ -16,6 +18,12 @@ async function mintAndList() {
     const tx = await nftMarketplace.listItem(basicNft.address, tokenId, PRICE)
     await tx.wait(1)
     console.log("Listed!")
+    console.log("---------------------------------------------------")
+
+    if (localChains.includes(network.name)) {
+        console.log("moving blocks...")
+        await moveBlocks(2, 1000)
+    }
 }
 
 // We recommend this pattern to be able to use async/await everywhere

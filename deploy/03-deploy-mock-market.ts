@@ -9,8 +9,7 @@ const DeployMockNftMarket: DeployFunction = async ({
 }: HardhatRuntimeEnvironment) => {
     const { deploy, log } = deployments
     const { deployer } = await getNamedAccounts()
-    //const chainId = network.config.chainId as number
-
+    
     const nftMarket = await ethers.getContract("NftMarketplace")
     const basicNft = await ethers.getContract("BasicNft")
 
